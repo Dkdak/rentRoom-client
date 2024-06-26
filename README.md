@@ -77,16 +77,19 @@ npm install
 2) vite@latest 생성 후 rentRoom-client 통합
 ```sh
 npm create vite@latest rentRoom-client
-
+```
+```markdown
   select a framework :
 	React 선택
   select a variant :
 	JavaScript 선택
-
+```
+```sh
 cd rentRoom-client
 npm install
 npm run dev
-
+```
+```markdown
   VITE v5.3.1  ready in 1347 ms
   ➜  Local:   http://localhost:5173/
   ➜  Network: use --host to expose

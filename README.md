@@ -133,6 +133,8 @@ npm install
 
 
 - 프로젝트의 package 에 라이브러리 추가
+```sh
 npm install axios --save-dev   <-- db에 바로 접속하기 위해서 사용
 npm install axios bootstrap react react-bootstrap react-dom --save  <-- react 사용
 npm install axios bootstrap react react-bootstrap react-dom --save-dev
+```

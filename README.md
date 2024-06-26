@@ -54,7 +54,7 @@ select a variant :
 	JavaScript 선택	
 ```
 
-2) 만들어진 프로젝트로 들어가서 npm install
+2) 만들어진 프로젝트로 들어가서 의존성 설치
 ```sh
 cd .<만들어진 프로젝트>
 npm install
@@ -77,9 +77,20 @@ npm install
 2) vite@latest 생성 후 rentRoom-client 통합
 ```sh
 npm create vite@latest rentRoom-client
+
+  select a framework :
+	React 선택
+  select a variant :
+	JavaScript 선택
+
 cd rentRoom-client
 npm install
+npm run dev
 
+  VITE v5.3.1  ready in 1347 ms
+  ➜  Local:   http://localhost:5173/
+  ➜  Network: use --host to expose
+  ➜  press h + enter to show help
 ```
 
 

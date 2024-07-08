@@ -13,12 +13,6 @@ export async function addRoom(photo, roomType, roomPrice) {
 
     try {
         const response = await api.post("/rooms/add/new-room", formData);
-        // const response = await api.post("/rooms/add/new-room", formData, {
-        //     headers: {
-        //         "Content-Type": "multipart/form-data"
-        //     }
-        // });
-
         if (response.status === 201) {
             return true;
         } else {
@@ -62,4 +56,42 @@ export async function getAllRooms() {
         throw new Error("Error fetching rooms");
     }
 
+}
+
+
+/* delete a room by the id ($들어가면 ~위의 `를 사용해라 인식이 잘 안된다)*/
+export async function deleteRoom(roomId) {
+    try {
+        console.log(`Deleting room with ID: ${roomId}`);
+        const result = await api.delete(`/rooms/delete/room/${roomId}`);
+        console.log(`Result: ${result.data}`);
+        return result.data;
+    } catch (error) {
+        console.error(`Error deleting room: ${error.message}`);
+        throw new Error(`Error deleting room: ${error.message}`);
+    }
+}
+
+/** update a room */
+export async function updateRoom(roomId, roomData) {
+    const formData = new FormData()
+    formData.append("roomType", roomData.roomType)
+    formData.append("roomPrice", roomData.roomPrice)
+    formData.append("photo", roomData.photo)
+    const response = await api.put(`/rooms/update/${roomId}`, formData)
+    return response;
+}
+
+/* get a room by id */
+export async function getRoomById(roomId) {
+    console.log(`getRoomById called with roomId: ${roomId}`); // roomId 로그
+    
+    try {
+        const result = await api.get(`/rooms/room/${roomId}`);
+        console.log(`API response:`, result); // API 응답 로그
+        return result.data;
+    } catch (error) {
+        console.error(`Error fetching room: ${error.message}`); // 에러 로그 추가
+        throw new Error(`Error fetching room: ${error.message}`);
+    }
 }

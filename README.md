@@ -132,7 +132,43 @@ npm install
 ```
 
 
-- 프로젝트의 package 에 라이브러리 추가
+5. 프로젝트의 package 라이브러리 확인
+- package.json
+```sh
+{
+  "dependencies": {
+    "axios": "^x.x.x",
+    "bootstrap": "^x.x.x",
+    "react": "^x.x.x",
+    "react-bootstrap": "^x.x.x",
+    "react-dom": "^x.x.x"
+  }
+}
+
+```
+- dependencies : 애플리케이션이 실행될 때 필요한 패키지
+```sh
+npm install <package-name> 또는 yarn add <package-name>
+```
+
+- devDependencies : 애플리케이션을 개발하는 동안에만 필요한 패키지
+```sh
+npm install <package-name> --save-dev 또는 yarn add <package-name> --dev
+```
+- 프로덕션 환경에서는 dependencies만 설치
+```sh
+npm install --only=production 또는 yarn install --production
+```
+
+- 예) 프로젝트의 package 에 라이브러리 추가
+```sh
+추가
 npm install axios --save-dev   <-- db에 바로 접속하기 위해서 사용
 npm install axios bootstrap react react-bootstrap react-dom --save  <-- react 사용
 npm install axios bootstrap react react-bootstrap react-dom --save-dev
+npm install react-icons react-router-dom --save-dev <-- icon사용, 네비게이트 링크등 사용
+
+제거
+npm uninstall axios bootstrap react react-bootstrap react-dom --save
+npm uninstall webpack babel-core eslint jest --save-dev
+```

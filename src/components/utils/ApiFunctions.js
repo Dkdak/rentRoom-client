@@ -4,6 +4,21 @@ export const api = axios.create({
     baseURL: "http://localhost:9192"
 });
 
+
+/**
+ * 라우저의 저장소 기능 중 하나로, 사용자가 데이터를 브라우저에 영구적으로 저장할 수 있게 해줍니다. 
+ * localStorage에 저장된 데이터는 브라우저를 닫거나 컴퓨터를 재부팅해도 유지됩니다.
+ *  localStorage에서 저장된 token을 가져와서 HTTP 요청 헤더에 사용할 인증 정보를 반환
+ */
+export const getHeader = () => {
+    const token = localStorage.getItem("token")
+    return {
+        Authorization : `Bearer ${token}`,
+        "Content-Type" : "application/json"
+    }
+}
+
+
 /* this function add room type */
 export async function addRoom(photo, roomType, roomPrice) {
     const formData = new FormData();
@@ -143,8 +158,16 @@ export async function getBookingByConfirmationCode(confirmationCode) {
         console.log(`bookRoom confirmationCode:`, result); // API 응답 로그
         return result.data;
     } catch (error) {
-        console.error(`Error confirmationCode: ${error.message}`); // 에러 로그 추가
-        throw new Error(`Error confirmationCode: ${error.message}`);
+        if (error.response) {
+            console.error(`Error response: ${error.response.status}, ${error.response.data}`);
+            throw error; // axios 에러 객체를 그대로 던짐
+        } else if (error.request) {
+            console.error('Error request: No response received');
+            throw new Error('No response received');
+        } else {
+            console.error(`Error message: ${error.message}`);
+            throw new Error(error.message);
+        }
     }
 }
 
@@ -158,5 +181,93 @@ export async function cancelBooking(bookingId) {
     } catch (error) {
         console.error(`Error delete: ${error.message}`); // 에러 로그 추가
         throw new Error(`Error delete: ${error.message}`);
+    }
+}
+
+
+/** get all available rooms from the database  */
+export async function getAvailableRooms(checkInDate, checkOutDate, roomType) {
+    console.log(`bookRoom checkInDate:`, checkInDate);
+    console.log(`bookRoom checkOutDate:`, checkOutDate);
+    console.log(`bookRoom roomType:`, roomType);
+    const result = await api.get(`/rooms/available-rooms?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&roomType=${roomType}`);
+
+    console.log("Available status:", result.status); // 상태 코드 출력
+    console.log("Available result:", result.data); // 서버에서 받은 데이터 출력
+    
+    return result;
+}
+
+
+export async function registerUser(registration) {
+    try {
+        const response = await api.post("/auth/register-user", registration);
+        return response.data;
+
+    } catch(error) {
+        if(error.response && error.response.data) {
+            throw new Error(error.response.data);
+        } else {
+            throw new Error(`user registration error : ${error.message}`)
+        }
+    }
+}
+
+export async function loginUser(login) {
+    try {
+        const response = await api.post("/auth/login", login);
+        if(response.status >= 200 && response.status < 300) {
+            return response.data;
+        } else {
+            return null;
+        }
+    } catch(error) {
+        console.error(error);
+        return null;
+    }
+
+}
+
+
+export async function getUserProfile(userId, token) {
+    try {
+        const response = await api.get(`/users/profile/${userId}`, {
+            headers: getHeader() 
+        })
+        return response.data
+
+    } catch(error) {
+        throw error
+
+    }
+}
+
+
+export async function deleteUser(userId) {
+    try {
+        const response = await api.delete(`/users/delete/${userId}`, {
+            headers: getHeader()
+        })
+        return response.data
+
+    } catch(error) {
+        throw error.message
+
+    }
+}
+
+
+
+
+export async function getUser(userId, token) {
+    try {
+        const response = await api.get(`/users/${userId}`, {
+            headers: getHeader() 
+        })
+        return response.data
+
+    } catch(error) {
+        throw error
+
     }
 }

@@ -238,3 +238,104 @@ body {
     background-color: #f8f9fa;
     color: #007bff;
 }
+
+
+/* Customize Bootstrap Carousel controls */
+.carousel-control-prev,
+.carousel-control-next {
+    width: 8%; /* 조정할 너비 */
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+    margin-left: -1rem; /* 조정할 마진 */
+}
+
+.carousel-control-prev {
+    left: 0;
+}
+
+.carousel-control-next {
+    right: 0;
+}
+
+
+/* Checkout.css */
+
+.room-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+
+.room-table th, .room-table td {
+  border: 1px solid #ddd; /* 테이블 선 스타일 지정 */
+  padding: 8px;
+  text-align: left; /* 텍스트를 좌측 정렬 */
+}
+
+.room-table th {
+  background-color: #f2f2f2; /* 헤더 배경색 지정 */
+}
+
+
+
+/* ReservationSummary.css */
+
+.reservation-summary {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-top: 30px;
+    background-color: #f9f9f9;
+}
+
+.reservation-summary h4 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.reservation-summary p {
+    margin-bottom: 10px;
+    font-size: 16px;
+}
+
+.reservation-summary strong {
+    font-weight: bold;
+}
+
+.reservation-summary .guest-info {
+    margin-top: 15px;
+}
+
+.reservation-summary .guest-info h5 {
+    margin-bottom: 10px;
+}
+
+.reservation-summary .guest-info strong {
+    margin-right: 10px;
+}
+
+.reservation-summary .payment-info {
+    margin-top: 20px;
+}
+
+.reservation-summary .payment-info .total-payment {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.reservation-summary .payment-info .payment-button {
+    margin-top: 10px;
+}
+
+.reservation-summary .spinner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.reservation-summary .spinner-border {
+    color: #007bff; /* Bootstrap primary color */
+}

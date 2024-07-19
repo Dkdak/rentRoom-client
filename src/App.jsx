@@ -15,30 +15,44 @@ import BookingSuccess from './components/booking/BookingSuccess';
 
 import NavBar from './components/layout/NavBar';
 import Footer from './components/layout/Footer';
+import Bookings from './components/booking/Bookings';
+import FindBooking from './components/booking/FindBooking';
+import Login from './components/auth/Login';
+import Registration from './components/auth/Registration';
+import Profile from './components/auth/Profile';
+import Logout from './components/auth/Logout';
+import AuthProvider from './components/auth/AuthProvider';
 
 
 function App() {
-  
-  return (
-    <>
-    <main>
-      <Router>
-        <NavBar/>
-        <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/edit-room/:roomId' element={<EditRoom/>}/>
-          <Route path='/existing-rooms' element={<ExistingRooms/>}/>
-          <Route path='/add-room' element={<AddRoom/>}/>
-          <Route path='/book-room/:roomId' element={<Checkout/>}/>
-          <Route path='/browse-all-rooms' element={<RoomListing/>}/>
-          <Route path='/admin' element={<Admin/>}/>
-          <Route path='/booking-success' element={<BookingSuccess/>}/>
-        </Routes>
-      </Router>
-      <Footer/>
-    </main>
 
-    </>
+  return (
+    <AuthProvider>
+      <main>
+        <Router>
+          <NavBar />
+          <Routes>
+            <Route path='/' element={<Home />} />
+            <Route path='/edit-room/:roomId' element={<EditRoom />} />
+            <Route path='/existing-rooms' element={<ExistingRooms />} />
+            <Route path='/add-room' element={<AddRoom />} />
+            <Route path='/book-room/:roomId' element={<Checkout />} />
+            <Route path='/browse-all-rooms' element={<RoomListing />} />
+            <Route path='/admin' element={<Admin />} />
+            <Route path='/booking-success' element={<BookingSuccess />} />
+            <Route path='/existing-bookings' element={<Bookings />} />
+            <Route path='/find-booking' element={<FindBooking />} />
+
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Registration />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/logout' element={<Logout />} />
+          </Routes>
+        </Router>
+        <Footer />
+      </main>
+
+    </AuthProvider>
   );
 }
 

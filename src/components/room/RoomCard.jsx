@@ -9,7 +9,7 @@ const RoomCard = ({ room }) => {
             <Card>
                 <CardBody className='d-flex flex-wrap align-items-center'>
                     <div className='flex-shrink-0 mr-3 mb-3 mb-md-0'>
-                        <Link to={`/book-room/${room.id}`} className='btn btn-hotel btn-sm'>
+                        <Link to={`/book-room/${room.id}`} >
                         <CardImg
                             variant='top'
                             src={`data:image/jpeg;base64,${room.photo}`}

@@ -30,15 +30,15 @@ const BookingSummary = ({booking, payment, isFormValid, onConfirm}) => {
 
 
     return (
-        <div className='card card-body mt-5'>
+        <div className='reservation-summary card card-body mt-5'>
             <h4>Reservation Summay</h4>
 
-            <p>FullName : <strong>{booking.guestName}</strong></p>
+            <p>FullName : <strong>{booking.guestFullName}</strong></p>
             <p>Email : <strong>{booking.guestEmail}</strong></p>
             <p>Check-In Date : <strong>{moment(booking.checkInDate).format("MMM Do YYYY")}</strong></p>
             <p>Check-Out Date : <strong>{moment(booking.checkOutDate).format("MMM Do YYYY")}</strong></p>
             <p>Number of Days : <strong>{numOfDays}</strong></p>
-            <div>
+            <div className='guest-info'>
                 <h5>Number of Guest</h5>
                 <strong>
                     Adult{booking.numOfAdults > 1 ? "s" : ""} : {booking.numOfAdults}
@@ -49,7 +49,8 @@ const BookingSummary = ({booking, payment, isFormValid, onConfirm}) => {
             </div>
             {payment > 0 ? (
                 <>
-                <p>
+                <div className='payment-info'>
+                <p className='total-payment'>
                     Total Payment : <strong>${payment}</strong>
                 </p>
                 {isFormValid && !isBookingConfirmed ? (
@@ -69,14 +70,15 @@ const BookingSummary = ({booking, payment, isFormValid, onConfirm}) => {
                         )}
                     </Button>
                 ) : isBookingConfirmed ? (
-                    <div className='d-flex justify-content-center align-items-center'>
+                    // <div className='d-flex justify-content-center align-items-center'>
+                    <div className='spinner-container'>
                         <div className='spinner-border text-primary' role='status'>
                             <span className='sr-only'>Loading</span>
                         </div>
                     </div>
 
                 ) : null}
-                
+                </div>
                 </>
             ) : (
                 <p className='text-danger'> Check-out date must be after check-in date</p>

@@ -33,7 +33,7 @@ const RoomCarousel = () => {
             </Link>
 
             <Container>
-                <Carousel indicators={false}>
+                <Carousel indicators={false} pause="hover" className="custom-carousel">
                     {[...Array(Math.ceil(rooms.length / 4))].map((_, index) => (
                         <Carousel.Item key={index}>
                             <Row>
@@ -49,11 +49,11 @@ const RoomCarousel = () => {
                                                     style={{ height: "200px" }}
                                                 />
                                             </Link>
-                                            <CardBody className='d-flex flex-wrap align-items-center'>
+                                            <CardBody className='d-flex flex-column align-items-center'>
                                                 <CardTitle className='hotel-color'>{room.roomType}</CardTitle>
                                                 <CardTitle className='room-price'>{room.roomPrice}/night</CardTitle>
                                                 <div className='flex-shrink-0'>
-                                                    <Link to={`/book-room/${room.id}`} className='btn btn-hotel btn-sm'>
+                                                    <Link to={`/book-room/${room.id}`} className='btn btn-hotel btn-sm' onClick={(e) => e.stopPropagation()} >
                                                         Book Now
                                                     </Link>
                                                 </div>

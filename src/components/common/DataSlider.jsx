@@ -6,8 +6,8 @@ import { DateRangePicker } from 'react-date-range'
 const DataSlider = ({ onDateChange, onFilterChange }) => {
 
     const [dateRange, setDateRange] = useState({
-        startDate : undefined, 
-        endDate : undefined,
+        startDate: new Date(), 
+        endDate: new Date(),
         key : "selection"
     })
 
@@ -18,14 +18,15 @@ const DataSlider = ({ onDateChange, onFilterChange }) => {
     }
 
     const handleClearFilter = () => {
-        setDateRange({
-            startDate : undefined, 
-            endDate : undefined,
-            key : "selection"
-        })
-        onDateChange(null, null)
-        onFilterChange(null, null)
-    }
+        const initialDateRange = {
+            startDate: new Date(), 
+            endDate: new Date(),
+            key: "selection"
+        };
+        setDateRange(initialDateRange);
+        onDateChange(null, null);
+        onFilterChange(null, null);
+    };
 
     return (
         <>

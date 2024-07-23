@@ -27,7 +27,9 @@ export async function addRoom(photo, roomType, roomPrice) {
     formData.append("roomPrice", roomPrice);
 
     try {
-        const response = await api.post("/rooms/add/new-room", formData);
+        const response = await api.post("/rooms/add/new-room", formData, {
+            headers: getHeader() 
+        });
         if (response.status === 201) {
             return true;
         } else {
@@ -43,10 +45,8 @@ export async function addRoom(photo, roomType, roomPrice) {
 export async function getRoomTypes() {
     try {
         const response = await api.get("/rooms/room/room-types");
-
-        console.log("Response data:", response.data); // 서버에서 받은 데이터 출력
-        console.log("Response status:", response.status); // 상태 코드 출력
-
+        // console.log("Response data:", response.data); // 서버에서 받은 데이터 출력
+        // console.log("Response status:", response.status); // 상태 코드 출력
         return response.data;
 
     } catch (error) {
@@ -61,9 +61,8 @@ export async function getAllRooms() {
 
     try {
         const result = await api.get("/rooms/all-rooms")
-
-        console.log("result data:", result.data); // 서버에서 받은 데이터 출력
-        console.log("result status:", result.status); // 상태 코드 출력
+        // console.log("result data:", result.data); // 서버에서 받은 데이터 출력
+        // console.log("result status:", result.status); // 상태 코드 출력
 
         return result.data;
     } catch (error) {
@@ -78,7 +77,9 @@ export async function getAllRooms() {
 export async function deleteRoom(roomId) {
     try {
         console.log(`Deleting room with ID: ${roomId}`);
-        const result = await api.delete(`/rooms/delete/room/${roomId}`);
+        const result = await api.delete(`/rooms/delete/room/${roomId}`, {
+            headers: getHeader() 
+        });
         console.log(`Result: ${result.data}`);
         return result.data;
     } catch (error) {
@@ -87,15 +88,19 @@ export async function deleteRoom(roomId) {
     }
 }
 
+
 /** update a room */
 export async function updateRoom(roomId, roomData) {
     const formData = new FormData()
     formData.append("roomType", roomData.roomType)
     formData.append("roomPrice", roomData.roomPrice)
     formData.append("photo", roomData.photo)
-    const response = await api.put(`/rooms/update/${roomId}`, formData)
+    const response = await api.put(`/rooms/update/${roomId}`, formData, {
+        headers: getHeader() 
+    })
     return response;
 }
+
 
 /* get a room by id */
 export async function getRoomById(roomId) {
@@ -103,7 +108,7 @@ export async function getRoomById(roomId) {
 
     try {
         const result = await api.get(`/rooms/room/${roomId}`);
-        console.log(`API response:`, result); // API 응답 로그
+        console.log(`getRoomById response:`, result);
         return result.data;
     } catch (error) {
         console.error(`Error fetching room: ${error.message}`); // 에러 로그 추가
@@ -114,20 +119,22 @@ export async function getRoomById(roomId) {
 
 /* new booking data */
 export async function bookRoom(roomId, booking) {
-    try {
+    console.log(`bookRoom request:`, roomId, booking);
 
-        console.log(`bookRoom request:`, booking); // API 응답 로그
-        const result = await api.post(`/bookings/room/${roomId}/booking`, booking);
+    try {
+        const result = await api.post(`/bookings/room/${roomId}/booking`, booking, {
+            headers: getHeader() 
+        });
         return result.data;
     } catch (error) {
         if (error.response) {
             // 서버가 응답한 상태 코드가 있는 경우
-            console.error(`Error bookRoom response: ${error.response.data}`); // 서버에서 전달한 에러 메시지
-            throw new Error(`Error bookRoom response: ${error.response.data}`);
+            console.error(`Error bookRoom : ${error.response.data}`); // 서버에서 전달한 에러 메시지
+            throw new Error(`Error bookRoom : ${error.response.data}`);
         } else if (error.request) {
             // 요청은 성공했지만 응답을 받지 못한 경우
-            console.error(`Error bookRoom request : No response received`);
-            throw new Error(`Error bookRoom request: No response received`);
+            console.error(`Error bookRoom : No response received`);
+            throw new Error(`Error bookRoom : No response received`);
         } else {
             // 요청을 설정하는 동안 문제가 발생한 경우
             console.error(`Error bookRoom message: ${error.message}`);
@@ -141,12 +148,14 @@ export async function bookRoom(roomId, booking) {
 /* all booking data */
 export async function getAllBookings() {
     try {
-        const result = await api.get(`/bookings/all-bookings`);
-        console.log(`bookRoom response:`, result); // API 응답 로그
+        const result = await api.get(`/bookings/all-bookings`, {
+            headers: getHeader() 
+        });
+        console.log(`getAllBookings response:`, result);
         return result.data;
     } catch (error) {
-        console.error(`Error bookRoom: ${error.message}`); // 에러 로그 추가
-        throw new Error(`Error bookRoom: ${error.message}`);
+        console.error(`Error getAllBookings: ${error.message}`); // 에러 로그 추가
+        throw new Error(`Error getAllBookings: ${error.message}`);
     }
 }
 
@@ -154,8 +163,10 @@ export async function getAllBookings() {
 /* get booking by the confirmation code */
 export async function getBookingByConfirmationCode(confirmationCode) {
     try {
-        const result = await api.get(`/bookings/confirmation/${confirmationCode}`);
-        console.log(`bookRoom confirmationCode:`, result); // API 응답 로그
+        const result = await api.get(`/bookings/confirmation/${confirmationCode}`, {
+            headers: getHeader() 
+        });
+        console.log(`confirmationCode:`, result);
         return result.data;
     } catch (error) {
         if (error.response) {
@@ -175,8 +186,10 @@ export async function getBookingByConfirmationCode(confirmationCode) {
 /* cancel booking */
 export async function cancelBooking(bookingId) {
     try {
-        const result = await api.delete(`/bookings/booking/${bookingId}/delete`);
-        console.log(`bookRoom delete:`, result); // API 응답 로그
+        const result = await api.delete(`/bookings/booking/${bookingId}/delete`, {
+            headers: getHeader() 
+        });
+        console.log(`delete:`, result);
         return result.data;
     } catch (error) {
         console.error(`Error delete: ${error.message}`); // 에러 로그 추가
@@ -187,13 +200,10 @@ export async function cancelBooking(bookingId) {
 
 /** get all available rooms from the database  */
 export async function getAvailableRooms(checkInDate, checkOutDate, roomType) {
-    console.log(`bookRoom checkInDate:`, checkInDate);
-    console.log(`bookRoom checkOutDate:`, checkOutDate);
-    console.log(`bookRoom roomType:`, roomType);
+    console.log(`getAvailableRooms :`, checkInDate, checkOutDate, roomType);
     const result = await api.get(`/rooms/available-rooms?checkInDate=${checkInDate}&checkOutDate=${checkOutDate}&roomType=${roomType}`);
-
-    console.log("Available status:", result.status); // 상태 코드 출력
-    console.log("Available result:", result.data); // 서버에서 받은 데이터 출력
+    // console.log("Available status:", result.status); // 상태 코드 출력
+    // console.log("Available result:", result.data); // 서버에서 받은 데이터 출력
     
     return result;
 }
@@ -213,11 +223,13 @@ export async function registerUser(registration) {
     }
 }
 
+
 export async function loginUser(login) {
     try {
         const response = await api.post("/auth/login", login);
+        console.log(`loginUser:`, response);
         if(response.status >= 200 && response.status < 300) {
-            return response.data;
+            return response.data;// { userId, email, token, roles }
         } else {
             return null;
         }
@@ -226,20 +238,6 @@ export async function loginUser(login) {
         return null;
     }
 
-}
-
-
-export async function getUserProfile(userId, token) {
-    try {
-        const response = await api.get(`/users/profile/${userId}`, {
-            headers: getHeader() 
-        })
-        return response.data
-
-    } catch(error) {
-        throw error
-
-    }
 }
 
 
@@ -257,8 +255,6 @@ export async function deleteUser(userId) {
 }
 
 
-
-
 export async function getUser(userId, token) {
     try {
         const response = await api.get(`/users/${userId}`, {
@@ -268,6 +264,21 @@ export async function getUser(userId, token) {
 
     } catch(error) {
         throw error
+
+    }
+}
+
+
+export async function getBookingsByUserId(userId, token) {
+    try {
+        const response = await api.get(`/bookings/user/${userId}/booking`, {
+            headers: getHeader() 
+        })
+        return response.data
+
+    } catch(error) {
+        console.error("Error fetching bookings:", error.message); // 에러 로그 추가
+        throw new Error(`failed to fetch bookings: ${error.message}`);
 
     }
 }

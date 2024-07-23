@@ -10,9 +10,10 @@ const BookingForm = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [roomPrice, setRoomPrice] = useState(0);
+    const currentUser = localStorage.getItem("userId")
     const [booking, setBooking] = useState({
         guestFullName: "",
-        guestEmail: "",
+        guestEmail: currentUser || "",
         checkInDate: "",
         checkOutDate: "",
         numOfAdults: "",
@@ -52,7 +53,7 @@ const BookingForm = () => {
         const checkInDate = moment(booking.checkInDate);
         const checkOutDate = moment(booking.checkOutDate);
         const diffInDays = checkOutDate.diff(checkInDate, 'days');
-        const price = roomPrice ? roomPrice : 0;
+        const price = roomPrice || 0;
         console.log("payment : " + diffInDays * price)
         return diffInDays * price;
     };
@@ -117,7 +118,7 @@ const BookingForm = () => {
                                         type='text'
                                         id='guestFullName'
                                         name='guestFullName'
-                                        value={booking.guestFullName}
+                                        value={booking.guestFullName || ""}
                                         placeholder='Enter your full name'
                                         onChange={handleInputChange}
                                     />
@@ -133,7 +134,7 @@ const BookingForm = () => {
                                         type='email'
                                         id='guestEmail'
                                         name='guestEmail'
-                                        value={booking.guestEmail}
+                                        value={booking.guestEmail || ""}
                                         placeholder='Enter your email'
                                         onChange={handleInputChange}
                                     />
@@ -152,7 +153,7 @@ const BookingForm = () => {
                                                 type='date'
                                                 id='checkInDate'
                                                 name='checkInDate'
-                                                value={booking.checkInDate}
+                                                value={booking.checkInDate || ""}
                                                 onChange={handleInputChange}
                                             />
                                             <Form.Control.Feedback type='invalid'>
@@ -167,7 +168,7 @@ const BookingForm = () => {
                                                 type='date'
                                                 id='checkOutDate'
                                                 name='checkOutDate'
-                                                value={booking.checkOutDate}
+                                                value={booking.checkOutDate || ""}
                                                 onChange={handleInputChange}
                                             />
                                             <Form.Control.Feedback type='invalid'>
@@ -188,7 +189,7 @@ const BookingForm = () => {
                                                 type='number'
                                                 id='numOfAdults'
                                                 name='numOfAdults'
-                                                value={booking.numOfAdults}
+                                                value={booking.numOfAdults || ""}
                                                 placeholder='0'
                                                 min={1}
                                                 onChange={handleInputChange}
@@ -205,7 +206,7 @@ const BookingForm = () => {
                                                 type='number'
                                                 id='numOfChildren'
                                                 name='numOfChildren'
-                                                value={booking.numOfChildren}
+                                                value={booking.numOfChildren || ""}
                                                 placeholder='0'
                                                 onChange={handleInputChange}
                                             />

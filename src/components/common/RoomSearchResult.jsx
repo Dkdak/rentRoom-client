@@ -16,8 +16,7 @@ const RoomSearchResult = ({ results, onClearSearch }) => {
     const startIndex = (currentPage - 1) * resultPerPage
     const endIndex = startIndex + resultPerPage
     const paginatedResult = results.slice(startIndex, endIndex)
-
-    console.log("paginatedResult result:", paginatedResult); // 서버에서 받은 데이터 출력
+    // console.log("paginatedResult result:", paginatedResult); // 서버에서 받은 데이터 출력
 
     return (
         <>

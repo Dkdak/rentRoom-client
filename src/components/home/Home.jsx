@@ -1,15 +1,29 @@
-import React from 'react'
+import React, { useContext } from 'react'
 
 import MainHeader from '../layout/MainHeader';
 import HotelService from '../common/HotelService';
 import Parallax from '../common/Parallax';
 import RoomCarousel from '../common/RoomCarousel';
 import RoomSearch from '../common/RoomSearch';
+import { AuthContext } from '../auth/AuthProvider';
+import { useLocation } from 'react-router-dom';
 
 const Home = () => {
 
+  // const { user } = useContext(AuthContext);
+  // console.log('Home =========Info:', user, localStorage.getItem("token")); // 추가된 로그
+
+  const location = useLocation()
+  const message = location.state && location.state.message
+  const currentUser = localStorage.getItem("userId")
+  console.log("currentUser: ", currentUser)
+
   return (
     <section>
+        {message && <p className='text-warning px-5'>{message}</p>}
+        {currentUser && (
+          <h6 className='text-success text-center'>You are logged-in as {currentUser}</h6>
+        )}
         <MainHeader/>
         <section className='container'>
           <RoomSearch/>

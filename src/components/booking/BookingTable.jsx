@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react'
-import { parseISO } from 'date-fns'
 import DataSlider from '../common/DataSlider'
 
 const BookingTable = ({bookingInfo, handleBookingCancellation}) => {
-
     const [filteredBookings, setFilteredBookings] = useState(bookingInfo)
+    
     const filterBookings = (startDate, endDate) => {
         let filtered = bookingInfo
         if(startDate && endDate) {
             filtered = bookingInfo.filter((booking) => {
-                const bookingStartDate = parseISO(booking.checkInDate)
-                const bookingEndDate = parseISO(booking.checkOutDate)
+                const bookingStartDate = new Date(booking.checkInDate);
+                const bookingEndDate = new Date(booking.checkOutDate);
+                
                 return bookingStartDate >= startDate 
                     && bookingEndDate <= endDate 
                     && bookingEndDate > startDate

@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react'
 import { loginUser } from '../utils/ApiFunctions'
 import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from './AuthProvider';  // AuthContext를 가져옵니다
+import UserLoginInfo from './UserLoginInfo';
 
 const Login = () => {
     const [errorMessage, setErrorMessage] = useState("")
@@ -26,11 +27,12 @@ const Login = () => {
         console.log("login data:", login);
         try {
             const success = await loginUser(login)
-            if(success) {
+
+            if(success && success.token) {
                 const token = success.token
                 handleLogin(token)
                 navigate("/")
-                window.location.reload()
+                // window.location.reload()
             } else {
                 setErrorMessage("Invalid username or password, Please try again.")
             }
@@ -39,9 +41,12 @@ const Login = () => {
             setErrorMessage("An error occurred during login. Please try again.");
         }
         
-        setTimeout(() => {
-            setErrorMessage("")
-        }, 4000)
+        // setTimeout(() => {
+        //     setErrorMessage("")
+        //     navigate("/")
+        //     window.location.reload()
+
+        // }, 4000)
     }
 
     return (
@@ -93,6 +98,7 @@ const Login = () => {
                         Dot't have an account yet?<Link to={"/register"}> Register </Link>
                     </span>
                 </div>
+                {/* <UserLoginInfo/> */}
             </form>
 
         </section>

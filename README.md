@@ -136,16 +136,36 @@ npm install
 - package.json
 ```sh
 {
+  "devDependencies": {
+    "@types/react": "^x.x.x",
+    "@types/react-dom": "^x.x.x",
+    "@vitejs/plugin-react": "^x.x.x",
+    "eslint": "^x.x.x",
+    "eslint-plugin-react": "^x.x.x",
+    "eslint-plugin-react-hooks": "^x.x.x",
+    "eslint-plugin-react-refresh": "^x.x.x",
+    "vite": "^x.x.x"
+  },
   "dependencies": {
+    "@popperjs/core": "^x.x.x",
     "axios": "^x.x.x",
     "bootstrap": "^x.x.x",
+    "cors": "^x.x.x",
+    "date-fns": "^x.x.x",
+    "jwt-decode": "^x.x.x",
+    "moment": "^x.x.x",
     "react": "^x.x.x",
     "react-bootstrap": "^x.x.x",
-    "react-dom": "^x.x.x"
+    "react-date-range": "^x.x.x",
+    "react-dom": "^x.x.x",
+    "react-icons": "^x.x.x",
+    "react-router-dom": "^x.x.x",
+    "reactstrap": "^x.x.x"
   }
 }
-
 ```
+For a detailed explanation of the `package.json` file, see [this document](docs/package-json-explanation.md).
+
 - dependencies : 애플리케이션이 실행될 때 필요한 패키지
 ```sh
 npm install <package-name> 또는 yarn add <package-name>

@@ -15,12 +15,7 @@ Currently, two official plugins are available:
 
 프론트엔드에 Docker를 설정하는 방법에 대한 자세한 내용은 [Docker 프론트엔드 설정](docker_frontend.md) 가이드를 참조하세요.
 
-## 기타 문서
 
-- [React + Vite 설정](react_vite_setup.md)
-- [Node.js 애플리케이션 기본 설정](node_js_app_basic_setup.md)
-- [Node.js에서 패키지 관리](package_management_in_node_js.md)
-- 
 # node js App 기본형 생성
 
 1) node js 설치
